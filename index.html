@@ -3,24 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pop-up Window</title>
-<script>
-  // Function to open the pop-up window
-  function openPopup() {
-    var popup = window.open("https://dasma50.github.io/dasmamygame/", "popUpWindow", "width=600,height=400");
-    
-    // Open additional pop-ups
-    for (var i = 0; i < 10; i++) {
-      window.open("https://dasma50.github.io/dasmamygame/", "popUpWindow" + i, "width=600,height=400");
-    }
+<title>Bouncing Pop-ups</title>
+<style>
+  .popup {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: #3498db;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: white;
+    font-family: Arial, sans-serif;
+    z-index: 9999;
   }
-
-  // Automatically open the pop-up when the page loads
-  window.onload = function() {
-    openPopup();
-  };
-</script>
+</style>
 </head>
 <body>
+<script>
+  // Function to create a pop-up and make it bounce
+  function createPopup() {
+    var popup = document.createElement("div");
+    popup.className = "popup";
+    popup.innerText = "POPUP";
+
+    // Set initial position and velocity
+    var posX = Math.random() * (window.innerWidth - 200);
+    var posY = Math.random() * (window.innerHeight - 200);
+    var velX = Math.random() * 4 - 2;
+    var velY = Math.random() * 4 - 2;
+
+    // Function to update position and check for collisions
+    function update() {
+      posX += velX;
+      posY += velY;
+
+      // Check for collision with window boundaries
+      if (posX < 0 || posX + 200 > window.innerWidth) {
+        velX *= -1;
+      }
+      if (posY < 0 || posY + 200 > window.innerHeight) {
+        velY *= -1;
+      }
+
+      // Update position
+      popup.style.left = posX + "px";
+      popup.style.top = posY + "px";
+
+      // Repeat the update loop
+      requestAnimationFrame(update);
+    }
+
+    // Start the update loop
+    update();
+
+    // Add the pop-up to the document
+    document.body.appendChild(popup);
+  }
+
+  // Create multiple pop-ups
+  for (var i = 0; i < 10; i++) {
+    createPopup();
+  }
+</script>
 </body>
 </html>
