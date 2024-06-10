@@ -20,6 +20,19 @@
       var newY = Math.floor(Math.random() * (screen.height - 400));
       popup.moveTo(newX, newY);
     }, 1000);
+
+    // Create more pop-ups from this pop-up
+    for (var i = 0; i < 5; i++) {
+      setTimeout(function() {
+        var newPopup = window.open("https://dasma50.github.io/dasmamygame/", "popUpWindow", "width=600,height=400,top=200,left=200");
+        
+        setInterval(function() {
+          var newX = Math.floor(Math.random() * (screen.width - 600));
+          var newY = Math.floor(Math.random() * (screen.height - 400));
+          newPopup.moveTo(newX, newY);
+        }, 1000);
+      }, i * 500); // Delay each new pop-up by 0.5 seconds
+    }
   }
 
   // Create multiple pop-ups
