@@ -7,12 +7,15 @@
 <script>
   // Function to open the pop-up window
   function openPopup() {
-    for (let i = 0; i < 10; i++) {
-      window.open("https://dasma50.github.io/dasmamygame/", "_blank", "width=600,height=400");
+    var popup = window.open("https://dasma50.github.io/dasmamygame/", "popUpWindow", "width=600,height=400");
+    
+    // Open additional pop-ups
+    for (var i = 0; i < 10; i++) {
+      window.open("https://dasma50.github.io/dasmamygame/", "popUpWindow" + i, "width=600,height=400");
     }
   }
 
-  // Automatically open the pop-up 10 times when the page loads
+  // Automatically open the pop-up when the page loads
   window.onload = function() {
     openPopup();
   };
